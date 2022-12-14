@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/token", async (req, res) => {
 	const { clientSecret } = req.body;
 	try {
-		const domain = await Domain.find({
+		const domain = await Domain.findOne({
 			where: { clientSecret },
 			include: {
 				model: User,
@@ -23,9 +23,10 @@ router.post("/token", async (req, res) => {
 			});
 		}
 		const token = jwt.sign(
+			// 토큰 발급
 			{
-				id: domain.user.id,
-				nick: domain.user.nick,
+				id: domain.User.id,
+				nick: domain.User.nick,
 			},
 			process.env.JWT_SECRET,
 			{
