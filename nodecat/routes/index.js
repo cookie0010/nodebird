@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 
 const router = express.Router();
-const URL = "http://localhost:8002/v1";
+const URL = "http://localhost:8002/v2";
 
 axios.defaults.headers.origin = "http://localhost:4000";
 const request = async (req, api) => {
@@ -43,7 +43,7 @@ router.get("/search/:hashtag", async (req, res, next) => {
 	try {
 		const result = await request(
 			req,
-			`/posts/hashtag/${encudeURIComponent(req.params.hashtag)}`,
+			`/posts/hashtag/${encodeURIComponent(req.params.hashtag)}`,
 		);
 		res.json(result.data);
 	} catch (err) {
