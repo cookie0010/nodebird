@@ -14,6 +14,7 @@ const v1 = require("./routes/v1");
 const v2 = require("./routes/v2");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
+const cors = require("cors");
 
 const app = express();
 passportConfig();
@@ -50,6 +51,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
